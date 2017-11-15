@@ -73,3 +73,13 @@ if __name__ == "__main__":
     i.prompt_end("Enter end time: (blank for timer) ")
     i.display()
     export_to_csv(i)
+
+    while input("Do you want to enter another item?(yY): ").lower() == 'y':
+        i = Item()
+        i.prompt_name("Name of the item: ")
+        i.prompt_start("Enter start time: (blank for current) ")
+        i.prompt_end("Enter end time: (blank for timer) ")
+        i.display()
+        export_to_csv(i)
+
+
