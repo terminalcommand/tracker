@@ -13,7 +13,7 @@ class Item():
         
     def prompt_name(self, prompt):
         self.name = input(prompt)
-        if name == '':
+        if self.name == '':
             print("Please enter a name")
             self.prompt_name(prompt)
         
@@ -46,7 +46,10 @@ class Item():
         # convert string to time.struct_time
         t1 = time.strptime(self.start, "%H:%M")
         t2 = time.strptime(self.end, "%H:%M")
-        print("Elapsed time " + str((time.mktime(t2)-time.mktime(t1))/60) + " minutes.")
+        dif = time.mktime(t2)-time.mktime(t1)
+        if dif < 0:
+            dif+=60*60*24
+        print("Elapsed time " + str(dif/60) + " minutes.")
 
 
 def export_to_csv(*items):
