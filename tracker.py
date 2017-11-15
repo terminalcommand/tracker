@@ -49,7 +49,6 @@ class Item():
 
 def export_to_csv(*items):
     now = time.localtime()
-
     filename = str(now.tm_year)+tostr(now.tm_mon)+tostr(now.tm_mday)+'.csv'
     present = os.path.exists(filename)
     with open(filename, 'a', newline='') as f:
