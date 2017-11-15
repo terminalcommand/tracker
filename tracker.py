@@ -13,7 +13,7 @@ class Item():
         
     def prompt_name(self, prompt):
         self.name = input(prompt)
-        if name == "":
+        if name == '':
             print("Please enter a name")
             self.prompt_name(prompt)
         
