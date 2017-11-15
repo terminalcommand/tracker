@@ -6,9 +6,13 @@ Run the script in python3 (e.g. python3 tracker.py)
 Follow the instructions on the screen :)
 
 Example:
+
   Name of the item: **Coding tracker.py**
+  
   Enter start time: (blank for current)  **Either enter time e.g 20:02 or just hit enter**
+  
   Enter end time: (blank for timer) **Either enter time or hit enter**
+  
   (Type in 'end' to stop timer...)  **Type end to stop timer**
 
 The script will automatically log all your entries in a csv file.
