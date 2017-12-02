@@ -1,6 +1,8 @@
 import csv
 import time
 import os
+# import readline # to be implemented for command history 4 previous tasks etc.
+# import difflib # to recognize typos and suggest corrections
 
 def tostr(t):
     return str(t).zfill(2)
@@ -22,9 +24,16 @@ class Item():
         if t == '':
             now = time.localtime()
             t = tostr(now.tm_hour)+":"+tostr(now.tm_min)
-        elif len(t) != 5:
+        elif len(t) != 5: # check for format
             print("Unrecognized time. Please enter time in 24h format e.g. 00:00")
             self.prompt_start(prompt)
+            return False # To end the current branch, otherwise becomes a tail-call
+        try: # check for valid time
+            time.strptime(t, "%H:%M")
+        except ValueError:
+            print("Unrecognized time. Please enter time in 24h format e.g. 00:00")
+            self.prompt_start(prompt)
+            return False # To end the current branch, otherwise becomes a tail-call
 
         self.start = t
 
@@ -32,12 +41,25 @@ class Item():
         t = input(prompt)
         if t == '':
             i = input("Type in 'end' to stop timer... ")
-            if i == "end":
-                now = time.localtime()
-                t = tostr(now.tm_hour)+":"+tostr(now.tm_min)
+            while i == '' or i: # essentialy while True
+                if i == "end":
+                    now = time.localtime()
+                    t = tostr(now.tm_hour)+":"+tostr(now.tm_min)
+                    # problem here, if the user does not type end, the loop still
+                    # exits
+                    break
+                else:
+                    i = input("Type in 'end' to stop timer... ")
         elif len(t) != 5:
             print("Unrecognized time. Please enter time in 24h format e.g. 00:00")
             self.prompt_end(prompt)
+            return False
+        try: # check for valid time
+            time.strptime(t, "%H:%M")
+        except ValueError:
+            print("Unrecognized time. Please enter time in 24h format e.g. 00:00")
+            self.prompt_end(prompt)
+            return False
 
         self.end = t
 
@@ -81,5 +103,3 @@ if __name__ == "__main__":
         i.prompt_end("Enter end time: (blank for timer) ")
         i.display()
         export_to_csv(i)
-
-
