@@ -45,8 +45,6 @@ class Item():
                 if i == "end":
                     now = time.localtime()
                     t = tostr(now.tm_hour)+":"+tostr(now.tm_min)
-                    # problem here, if the user does not type end, the loop still
-                    # exits
                     break
                 else:
                     i = input("Type in 'end' to stop timer... ")
